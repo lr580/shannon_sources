@@ -66,3 +66,7 @@
 
     比赛考点：ACM区域赛铜银算法。[比赛情况](https://oj.socoding.cn/contest/standing?id=471)
 
+14. 2022CS杯选拔赛 (2022-10-13)
+
+    比赛考点：基础(ACM铜)算法。[比赛情况](http://csoj.scnu.edu.cn/contest/71/rank)
+

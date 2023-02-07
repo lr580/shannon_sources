@@ -1,0 +1,217 @@
+\documentclass{beamer}
+\usepackage{xeCJK}
+\useinnertheme{rounded}
+\usecolortheme{seahorse}
+\useoutertheme{smoothbars}
+\begin{document}
+\title{香农先修班第一次课——见面会}
+\subtitle{算法导学}
+\institute{软件协会香农先修班}
+\author{lr580}
+\date{2022年7月13日}
+\logo{\includegraphics[width=70pt]{logo.jpg}}
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% \AtBeginSection[]{
+\begin{frame}
+    \frametitle{目录}
+    \tableofcontents%[currentsection]
+\end{frame}
+% }
+
+\section{香农先修班介绍}
+\begin{frame}
+    \begin{block}{先(xiu)修(xian)班简介}
+        香农先修班是软件协会下属组织，旨在传授入门和基础的算法知识，这些知识在算法竞赛与企业面试中会有较大帮助。
+    \end{block}
+    {\large\textbf{\color[RGB]{23, 130, 20}先修班负责人介绍}}\\
+    {\footnotesize 注：先按年级排序，后按拼音排序。}\\
+    \begin{itemize}
+        \item (20级)覃梓鑫
+        \item (21级)陈嘉成、陈家骏、李勉鑫、袁子锋
+    \end{itemize}
+    {\footnotesize (21级负责人是先修班讲课的主要人员。)}\\~\\
+    授课内容与时间参见 SCNUOJ 小组。
+\end{frame}
+
+\newtheorem{chdefinition}{定义}
+\section{算法的概念与学习指导}
+\subsection{算法的定义}
+\begin{frame}
+    \begin{chdefinition}
+        \textbf{算法}\ (algorithm)\\
+        {\footnotesize 注：这里特指传统算法（区分于人工智能算法），而且是狭义的算法（广义的传统算法是一切满足有穷性、确切性等的程序执行步骤，即 $a+b$ 也是算法）。}\\
+        具体而言，在先修班里，我们默认算法就是具体算法知识点的总和。这些知识点包括搜索、动态规划、数据结构、图论、数论等。
+    \end{chdefinition}
+    {\footnotesize 这些具体算法知识点可参见“XCPC知识树”。}\\~\\
+    \large{\textbf{\color[RGB]{250, 148, 27}算法的作用}}\\
+    \begin{itemize}
+        \item 求解问题的答案
+        \item 优化求解问题的用时/占用内存
+    \end{itemize}
+\end{frame}
+
+\subsection{学习算法的好处与条件}
+\begin{frame}
+    \begin{block}{学习算法的好处}
+        \begin{itemize}
+            \item 提升代码基本功，写项目的代码逻辑、debug等会比较轻松
+            \item 以后学算法与数据结构专业课易如反掌
+            \item 公司面试的算法部分能较轻松应对
+            \item 参加算法竞赛有机会获得省奖、国家奖等
+            \item 提升个人能力，如锻炼思维
+        \end{itemize}
+    \end{block}
+    \pause
+    \large{\textbf{\color[RGB]{218, 76, 21}学习算法的前置条件}}\\
+    \begin{enumerate}
+        \item \textbf{充足的时间精力}
+        \item 掌握一门编程语言
+        \item 一定的数学与英语基础
+    \end{enumerate}
+\end{frame}
+
+\subsection{学习算法的路线指导}
+\begin{frame}
+    \begin{block}{基本学习方法}
+        \begin{itemize}
+            \item 以做题练习为主
+            \item 重理解，而不是重记背
+        \end{itemize}
+    \end{block}
+    \large{\textbf{\color[RGB]{218, 76, 21}注意事项}}\\
+    \begin{itemize}
+        \item 算法学习周期较长，一般来说要数月努力才能看到明显的进步(特别是后期)
+        \item 多交流，学习他人代码和解题思路的优点
+        \item 看得懂与会做是两回事(重要的是如何想出来的)
+    \end{itemize}
+\end{frame}
+
+\subsection{相关资源}
+\begin{frame}
+    \large{\textbf{\color[RGB]{34, 164, 241}资源网站}}\\
+    \begin{enumerate}
+        \item oi-wiki\par %](https://oi-wiki.org/)
+        特点：算法的百科全书，较全的知识库，适合查资料，不适合顺序跟随学习。
+        \item 算法竞赛入门到进阶(罗勇军,郭卫斌)\par
+        特点：涵盖面广，但难度可能略高。
+        \item 挑战程序设计竞赛2\ 算法和数据结构(渡步有隆)\par %](https://cloud.socoding.cn/s/a8Fe?password=blue)
+        特点：较适合初学者入门，但知识并不是非常全。
+        \item 网络上海量的学习笔记、题解等\par
+        特点：散乱，质量参差不齐。\\但能补充知识，适合专题学习。
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \large{\textbf{\color[RGB]{34, 164, 241}做题网站(OJ)}}\\
+    \begin{enumerate}
+        \item 洛谷\\
+        特点：较多优秀的官方与非官方题单，题解丰富。
+        \item Codeforces\\
+        特点：有很多比赛真题。也适合打比赛练手(就是时间有点阴间)，比赛偏思维。
+        \item vjudge\\
+        特点：是 OJ 的集合，收集了各 OJ 的题。\\缺点是不稳定。
+    \end{enumerate}
+\end{frame}
+
+\subsection{算法学习的水平}
+\begin{frame}
+    通常而言，算法能力水平能粗略的划分如下：
+    \begin{enumerate}
+        \item \textbf{入门}(非先修班多数人的最终水平)\\
+        效果：达到专业课要求，能解决算法简单题和应付面试。\\
+        能力：能做出洛谷大部分橙题。
+        \item \textbf{基础}(先修班主体的平均水平)\\
+        效果：能获得省级或国家级算法比赛的多数奖项。\\
+        能力：洛谷全部官方题单掌握约 70\%，橙黄模板基本都会。
+        \item \textbf{进阶}(一个年级通常十数人或几人)\\
+        效果：能获 ACM 竞赛区域赛铜牌或以上。\\
+        表现：至少能通过软院集训队选拔赛进入集训队。
+    \end{enumerate}
+\end{frame}
+
+\section{主流算法比赛简介}
+\begin{frame}
+    \begin{alertblock}{注：}
+        \begin{itemize}
+            \item 所有比赛都能通过官网的或其他途径了解到详细信息。\\
+            因此，强烈建议有空自行去翻翻各比赛官网。
+            \item 这里介绍的比赛有：蓝桥杯、天梯赛、CCF、ACM。\\
+            此外还有不少算法比赛，如码加加、赛氪(四季赛)等也是国家级比赛，比较好混综测加分，可自行了解，不赘述。\\
+            还有 GDCPC(省赛) 和 SCNUCPC(校赛) 两算法比赛。
+            \item 以下介绍可能会发生变化，请以最新官网消息为准。
+        \end{itemize}
+    \end{alertblock}
+    \large{\textbf{\color[RGB]{37, 149, 68}打竞赛的好处}}
+    \begin{enumerate}
+        \item 面试时写在简历是加分项(特别是 ACM)。
+        \item 综测加分，混奖学金和保研。
+    \end{enumerate}
+\end{frame}
+
+\subsection{蓝桥杯}
+\begin{frame}
+    \textbf{\color[RGB]{34, 166, 242}蓝桥杯}分为省赛和国赛。省赛人均获奖，院内国赛每年大约10$\sim$20多人能进，平均国三。\\
+    省赛和国赛一般都在每年上半年(即春季学期)。省赛三四月份，国赛六月份。\\
+    赛制：OI 赛制。不可带资料的闭卷；且赛时无法得知代码是否通过；每道题通过部分测试点就得到部分得分。\\
+    省赛和国赛各需要自费 300。几乎没人能拿到院奖金(上一届国二奖 700，国一奖 1500)。\\
+    前 10\% 一等奖，20\% 二等，30\% 三等。即有效参赛里 60\% 得奖。\\
+    题目难度逐年上升。\\
+    比赛时长为 4h，通常是早上。\\
+    有填空题(不限手段作答，甚至可用 Excel 解)和常规题。\\
+    蓝桥杯是事实上不少先修班人的最终目的。\\
+    与之对标的院内比赛为蓝桥杯热身赛。
+\end{frame}
+
+\subsection{天梯赛}
+\begin{frame}
+    \textbf{\color[RGB]{34, 166, 242}天梯赛}是国家级比赛。软院内会选拔约 30 人有资格参加。\\
+    时间约是每年四月份。\\
+    赛制：IOI 赛制。与 OI 赛制的唯一不同是赛时能看到代码对错与否。过一个测试点得对应分(分数分布不均)。\\
+    有 100 分基础题(非算法送分题)，100 分算法入门题和 90 分算法进阶题。其中个人奖总 175 分国三，总 220 分国二，总 250 国一。去年全校没有国二及以上。\\
+    虽然写着是团队赛，但可粗暴理解为是个人赛并按个人去打就行，一般不用理会团队得分。\\
+    题型都是传统题。\\
+    只要能打到 100 分以上，不用花钱，学校报销。\\
+    比赛时长是 3h，通常是下午。\\
+    与之对标的院内比赛是天梯赛选拔赛。
+\end{frame}
+
+\subsection{CCF}
+\begin{frame}
+    \textbf{\color[RGB]{34, 166, 242}CCF认证}是考证，不算比赛。\\
+    初赛每年有三场，平均一个季度一场。复赛(CSP)每年一场。下面仅介绍初赛。\\
+    赛制：IOI 赛制。\\
+    有五道题，每题 100 分。通常第一题非算法，第二题简单算法或非算法，第三题大模拟，第四第五题进阶算法。多数能打到 200$\sim$300 多分。\\
+    100 分或以上不用花钱，学校报销。\\
+    考试时长是 4h。
+\end{frame}
+
+\subsection{ACM}
+\begin{frame}
+    一般提到 \textbf{\color[RGB]{34, 166, 242}ACM} 即 \textbf{\color[RGB]{34, 166, 242}ICPC}，全称是\textbf{国际大学生程序竞赛}。\\
+    我们一般只能接触到区域赛，即(东)亚洲区域赛，实际上基本都在大陆打，参赛选手也基本是国人。\\
+    我院的参赛前提是进入软院 ACM 集训队。一般每年 6 月份选拔，约选拔 20 人入队。\\
+    区域赛的一般评奖规则是：设总人数为 $n$，则金牌人数为 $x=\min(0.1n, 35)$，银牌数约为 $2x$，铜牌数约为 $3x$。即前 210 名有奖。\\
+    团队赛，三人一队参加。\\
+    该比赛是业界最认可的 IT 行业竞赛，几乎没有之一。\\
+    铜牌已经很厉害了(每年院内也就几支队伍拿铜)；\\
+    银牌企业面试大大加分(每年全校大约一两个银)；\\
+    金牌按理企业随便进(有史以来大概全校只有一个金)。
+\end{frame}
+
+\begin{frame}
+    ACM 与上文比赛区别较大。首先题面全英，题目大约10到12题，题目排序与难度无关。比赛时间为 5h。\\
+    赛制称为 ICPC 赛制，允许携带任何纸质资料。每道题只有全部测试点全对才能得分。除编译错误(CE)外通过(AC)前每次错误提交(WA,TLE,RE等)罚时 20 分钟。总用时是每道过了的题从比赛开始到首次通过的用时和加上罚时和。排名先按过题数后按用时和。\\
+    题目难度较大，思维难度大，灵活，可能有的场过 2 题就能拿铜。\\
+    三人一队一机。视疫情好坏可能举办线上或线下赛。线上一般人很多(六到八百队左右参赛)，线下人比较少(大约两到四百队)。比赛费用全报销，线下可以去公费旅游\\(上文其他比赛都是在校内打的)。\\
+    每年(届)每人最多正式参加两场区域赛。\\且学院名额一般很有限。\\
+    比赛时长为 5h。
+\end{frame}
+
+\begin{frame}
+    \textbf{\color[RGB]{34, 166, 242}CCPC} 是\textbf{中国大学生程序设计竞赛}，其区域赛含金量约等于 ICPC 区域赛。赛制等基本与 ICPC 一致。有时用 XCPC 统称 ICPC 和 CCPC。\\
+\end{frame}
+
+\end{document}

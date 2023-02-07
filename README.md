@@ -54,7 +54,15 @@
 
     > 其中，"异世界的人偶训练"一题由 [dayuanx](https://github.com/Dayuan-mc) 改编自 [CF721B2](https://codeforces.com/problemset/problem/1527/B2)
 
-11. 2022天梯赛选拔赛
+11. wintercode 活动 (2022-1-27)
 
-12. 2022ACM集训队选拔赛
+    活动考点：简单算法。[活动情况](https://mp.weixin.qq.com/s?__biz=MzIyMjc3NDQ4OQ==&mid=2247486398&idx=1&sn=b71e701ca84b8caf7747315d3fd90d48&chksm=e8291e08df5e971e29b87d0c9026ba11e85e4e743b66bcd7fd000df7e7543342e7bfd3c56635&mpshare=1&scene=2&srcid=0127baLY9UniiWikTCBGHW3k&sharer_sharetime=1643254499404&sharer_shareid=715050024becca24a42dc202eca6cc0e#rd)
+
+12. 2022天梯赛选拔赛 (2022-3-12)
+
+    比赛考点：接近2021团体程序设计天梯赛。[比赛情况](https://oj.socoding.cn/contest/standing?id=453)
+
+13. 2022ACM集训队选拔赛 (2022-6-12)
+
+    比赛考点：ACM区域赛铜银算法。[比赛情况](https://oj.socoding.cn/contest/standing?id=471)
 

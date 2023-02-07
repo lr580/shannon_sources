@@ -1,0 +1,507 @@
+\documentclass[
+    % draft,                             % 草稿模式
+     aspectratio=169,                   % 使用 16:9 比例
+]{beamer}
+\mode<presentation>
+\usetheme[
+    navigation=subsections,            % 使用子章节进度显示
+    % lang=en,                           % 使用英文
+    % cjk=true,                          % 使用CJK而不是ctex
+    color=blue,                         % 使用红色主题
+    % pattern=all,                        % 使用全图案装饰
+    % gbt=bibtex,                        % 使用 gbt (使用 bibtex 编译)
+]{SJTUBeamermin}
+% \usecolortheme[]{beaver}                 % 使用其他颜色主题
+\addbibresource{ref.bib}               % gbt!=bibtex
+
+\begin{document}
+    \institute[School of Software]{软件学院}   % 组织
+    \logo{
+        \includegraphics{vi/scnu.png}  % 重定义 logo
+    }
+    %\titlegraphic{                         % 标题图像
+    %    \begin{stampbox}[white]
+    %        \includegraphics[width=0.3\textwidth]{vi/head.jpg}
+    %    \end{stampbox}
+    %}
+    \title{2021 年 AK 杯程序设计竞赛}  % 标题
+    \subtitle{题目分析和解题思路参考}         % 副标题
+    \author{软件协会香农先修班}                  % 作者
+    \date{\today}                          % 日期  
+    \maketitle                             % 创建标题页
+
+%----------------------------------------------------------------
+    
+\part{概况}
+
+\begin{frame}
+	\frametitle{概况}
+	\begin{itemize}
+		\item A-E：作业题
+		\item F：计算几何
+		\item G：构造
+		\item H：模拟
+		\item I：排序
+		\item J：递推
+		\item H：贪心
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem B. 阶梯}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 给定一个坐标 $(x,y)$，判断这个坐标在题图中所在的区域。
+		\item 保证坐标不在区域边界。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	 \begin{exampleblock}{关键点}
+	 	\begin{itemize}
+			\item 第一象限上的点所在区域编号只跟 $\min(x,y)$ 的值有关。
+			\item 将点 $x$ 和 $y$ 的值取相反数不影响点的区域编号。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 使用 \lstinline|fabs()| 取绝对值，直接判断 $(|x|,|y|)$ 所在的区域编号。
+		\item $(|x|,|y|)$ 所在的区域编号为 $\lceil\min(|x|,|y|)\rceil$。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 通常使用 \lstinline|double| 存储浮点数。
+			\item 浮点数需要使用 \lstinline|fabs()| 取绝对值。
+			\item 输出的应该是一个整数。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{完整代码（C 语言）}
+#include <stdio.h>
+#include <math.h>
+int main() {
+    double x, y;
+    scanf("%lf%lf", &x, &y);
+    x = fabs(x);
+    y = fabs(y);
+    printf("%.0lf\n", x < y ? ceil(x) : ceil(y));
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem C. 三元方程}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 解关于 $x,y,z$ 的不定方程 $x^3+y^3+z^3=k$。
+		\item $x,y,z$ 都是整数且 $1 \leq |x|,|y|,|z| \leq 100$。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	\begin{itemize}
+		\item 枚举 $x,y,z$ 所有可能的值。
+		\item 判断此时 $x^3+y^3+z^3$ 是否等于 $k$。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 记得跳过 $x=0$ 或 $y=0$ 或 $z=0$ 的情况。
+			\item 在没有符合条件的 $x,y,z$ 时要输出 \lstinline|no solution|。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{核心代码（C 语言）}
+for (int x = -100; x <= 100; x++) {
+    for (int y = -100; y <= 100; y++) {
+        for (int z = -100; z <= 100; z++) {
+            if (x && y && z && x * x * x + y * y * y + z * z * z == k) {
+                printf("%d %d %d\n", x, y, z);
+                return 0;
+            }
+        }
+    }
+}
+puts("no solution");
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem D. 字符串得分}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 每个字母的得分为它在字母表中的位置。
+		\item 给定长为 $n$ 的字符串 $a$，字符串第 $i$ 个字母编号为 $i$，所有编号为奇数的字母得分的和是 $s_1$，所有编号为偶数的字母的得分的和为 $s_2$，计算 $(s_1-s_2)/n$ 的值。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	\begin{itemize}
+		\item 使用 \lstinline|strlen()| 获取字符串长度 $n$。
+		\item 遍历字符串，分类讨论下标奇偶性并相应作加减，得到 $s_1-s_2$ 的值。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 题目中的编号从 $1$ 开始，但字符串下标从 $0$ 开始。
+			\item 不要在判断条件中多次调用 \lstinline|strlen(s)|。
+			\item 转换为浮点数后再做除法。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{字符串读入（C 语言）}
+char a[100010]; // 数组建议开大一些
+scanf("%s", a); // 此处不需要加取地址值符
+\end{codeblock}
+	\begin{codeblock}{c}{核心代码（C 语言）}
+int n = strlen(a), ans = 0;
+for (int i = 0; i < n; i++) {
+    ans += (a[i] - 'a' + 1) * (i % 2 ? -1 : 1);
+}
+printf("%lf\n", 1.0 * ans / n);
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem E. 排列}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 构造一个 $1-n$ 的排列，使任意相邻两项的和大于等于 $n$。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	可行的构造方法：
+	\begin{equation}
+	a_i = \left\{\begin{aligned} &\frac{i}{2} 
+	 &(&i \ \text{is even}) \\ &n-\frac{i-1}{2} 
+	 &(&i \ \text{is odd})
+	\end{aligned}\right.
+	\end{equation}	
+	\begin{block}{为什么}
+		\begin{itemize}
+			\item 若 $1 \leq x \leq \frac{n}{2}$，有 $1 \leq 2x \leq n$ 且 $a_{2x}=x$。
+			\item 若 $\frac{n}{2}+1 \leq x \leq n$，有 $1 \leq 2n-2x+1 \leq n$ 且 $a_{2n-2x+1}=x$。
+			\item 若 $j$ 是奇数 $a_j+a_{j+1}=(n-\frac{j-1}{2}) + \frac{j+1}{2} =n+1 \geq n$。
+			\item 若 $j$ 是偶数 $a_j+a_{j+1}=\frac{j}{2} +(n-\frac{j}{2})  =n \geq n$。
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{核心代码（C 语言）}
+for (int i = 1; i <= n; i++) {
+    if (i % 2 == 0) {
+        printf("%d ", i / 2);
+    }
+    else {
+        printf("%d ", n - (i - 1) / 2);
+    }
+}
+putchar('\n');
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem F. 排名并列}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 给定已按成绩降序排列的成绩表，求每位同学的排名。
+		\item 成绩越高排名越靠前，且同分的考生赋予相同的排名。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	\begin{itemize}
+		\item 如果某一名学生排在表格第一位或他的分数跟位于他上面一行同学的分数不同，他的排名就是他在表格中的行数。
+		\item 否则，他的排名就跟位于他上面一行同学的排名相同。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 如果你使用其它方式实现排名计算，别忘了考虑所有人分数均相同的情况。
+			\item 需要输出的是排名和姓名，而不是分数。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{核心代码（C 语言）}
+m[0] = -1;
+for (int i = 1; i <= n; i++) {
+    rank[i] = (m[i] != m[i - 1]) ? i : rank[i - 1];
+}
+printf("%d\n", rank[n]);
+for (int i = 1; i <= n; i++) {
+    if (rank[i] <= r) {
+        printf("%d %s\n", rank[i], x[i]);
+    }
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem G. 非降序列}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 给定序列 $a$，每次操作可任意交换两数或锁定、解锁某个数。
+		\item 操作完成后回答能否通过两两交换未被锁定的数使序列成为非降序列。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	\begin{itemize}
+		\item 复制一份序列 $a$ 并对其进行排序。
+		\item 每次操作结束后只需检查被锁定元素的值跟排序后对应元素的值是否相同。
+	\end{itemize}
+	\begin{block}{为什么}
+		\begin{itemize}
+			\item 只要是可能成为非降序列，最终得到的非降序列一定是唯一的。
+			\item 将未被锁定的元素按原相对顺序取出组成子序列，必有方法使该子序列有序。
+			\item 「数值大小介于任意两个锁定元素」的未被锁定元素数量是确定的。
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码 1}
+	\begin{codeblock}{c}{排序（C 语言）}
+for (int i = 1; i <= n; i++) {
+    b[i] = a[i];
+}
+for (int i = 1; i < n; i++) {
+    for (int j = 1; j <= n - i; j++) {
+        if (b[j] > b[j + 1]) {
+            int temp = b[j]; b[j] = b[j + 1]; b[j + 1] = temp;
+        }
+    }
+}
+\end{codeblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码 2}
+	\begin{codeblock}{c}{操作与查询（C 语言）}
+if (o == 1) {
+    s[x] = y;
+}
+else {
+    int temp = a[x]; a[x] = a[y]; a[y] = temp;
+}
+int flag = 1;
+for (int i = 1; i <= n; i++) {
+    if (s[i] == 0 && a[i] != b[i]) {
+        flag = 0;
+    }
+}
+printf("%d\n", flag);
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem H. 数的气质}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item $p(a)=\prod_{i=1}^n(a_i \bmod (i+1))$，$a_i$ 是整数 $a$ 从左往右第 $i$ 个数位。
+		\item 在 $a$ 两个数位间插入一串数，使新得到的整数 $a'$ 满足 $p(a')<p(a)$。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	\begin{itemize}
+		\item 直接输出 $0$。
+	\end{itemize}
+	
+	\begin{block}{为什么}
+		\begin{itemize}
+			\item $0 \bmod p =0 $ 对于任意大于 $1$ 的整数 $p$ 均成立。
+			\item 无论在哪两个数位间插入 $0$，都能使 $p(a')=0$。
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	 \begin{codeblock}{c}{完整代码（C 语言）}
+#include <stdio.h>
+int main() {
+    puts("0");
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem I. 千层塔}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 第 $k$ 层有通往第 $k-1$ 层和第 $k-3$ 层的电梯。
+		\item 求第 $a$ 层到第 $b$ 层的方案数。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	 \begin{exampleblock}{关键点}
+		 \begin{itemize}
+			\item 方案数只跟始末楼层之差 $a-b$ 的值有关。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 用 $dp_i$ 表示需要始末楼层之差为 $i$ 时的方案数。
+		\item 递推公式 $dp_i=dp_{i-1}+dp_{i-3}$。
+	\end{itemize}
+	
+	\begin{block}{为什么}
+		\begin{itemize}
+			\item 为了能翻越 $i$ 层，你要么首先翻越 $i-1$ 层，再乘坐从 $k$ 层到 $k-1$ 层的电梯，要么首先翻越 $i-3$ 层，再乘坐从 $k$ 层到 $k-3$ 层的电梯。
+			\item 假设你从 $a$ 层到 $b$ 层，你现在手头上有所有 $a$ 层到 $b+3$ 层和 $a$ 层到 $b+1$ 层的方案。只需要对这些方案都补上一个 "$\to b$" 再合并到一块就是 $a$ 层到 $b$ 层的方案。在两类方案合并前如果各自都不存在重复的情况，那么合并后也不会出现重复的情况。
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	 \begin{codeblock}{c}{完整代码（C 语言）}
+#include <stdio.h>
+long long dp[120];
+int main() {
+    dp[0] = dp[1] = dp[2] = 1;
+    for (int i = 3; i <= 109; i++) {
+        dp[i] = dp[i - 1] + dp[i - 3];
+    }
+    int a, b;
+    scanf("%d%d", &a, &b);
+    printf("%lld\n", dp[a - b]);
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem J. UNO}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 三名玩家，每人 $7$ 张包含颜色和数字两种属性的牌。
+		\item 轮到自己时都会出从左往右第一张与参照牌同色或同数字的牌。
+		\item 打出去的牌会变成新的参照牌。
+		\item 连续两人无法出牌则第三人出手中最左边的牌。
+		\item 问谁能获得胜利。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	 
+	\begin{exampleblock}{关键点}
+		\begin{itemize}
+			\item 只有轮到了自己而且出牌机会还没使用才可出牌。
+			\item 只有当某张牌还没出过才可出这张牌。
+			\item 只有前面两个人没出牌或牌的任一属性与参照牌相同才可出这张牌。
+			\item 出了牌后必须更新参照牌的属性。
+			\item 出了牌后还需要判断玩家手中还有没有牌。
+			\item 要判断玩家本轮是否没有出牌。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 按照题目要求进行模拟。
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	 \begin{codeblock}{c}{核心代码（C 语言）}
+int flag = 1, cur = 0;
+for (int i = 0; i < 7; i++) {
+    if (flag && h[pos][i] && (nocnt == 2 || s[pos][i] == refs || n[pos][i] == refn)) {
+        refs = s[pos][i]; refn = n[pos][i]; // 更新参照牌属性
+        h[pos][i] = nocnt = flag = 0;
+    }
+    cur += h[pos][i]; // 统计玩家手中剩余牌的数量
+}
+if (cur == 0) {
+    puts(pos ? (pos == 1 ? "lr580" : "dayuanx") : "bobby"); break;
+}
+nocnt += flag; pos = (pos + 1) % 3;
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem K. 数位积}
+\begin{frame}
+	\frametitle{题目}
+	
+	\begin{itemize}
+		\item $f(k)$ 为十进制下 $k$ 的所有数位的乘积。
+		\item 解关于 $l,r$ 的不定方程 $x=\prod_{i=l}^{r}{f(i)}$。
+		\item $l,r$ 都是整数且 $0\leq l \leq r \leq 10^y -1$。
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	 
+	\begin{exampleblock}{关键点}
+		\begin{itemize}
+			\item 一旦区间中任意数位出现了 0，数位积就是 0。
+			\item 连续的十个数中必有一个数的个位是 0。
+			\item 要使位数最少，多个 $2,3$ 可以进行合并，必定不取 1。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 特判 $x=0$ 的情况。
+		\item 令 $l=10k+l',r=10k+r',1 \leq l' \leq r' \leq 9$。
+		\item $f(k)=(\frac{x}{\sum_{i=l'}^{r'}i})^{\frac{1}{r'-l'+1}}$，如果 $(\sum_{i=l'}^{r'}i) \nmid x$ 在此时的 $l',r'$ 下无解。
+		\item 将 $\frac{x}{\sum_{i=l'}^{r'}i}$ 分解为 $2^{c_2}\cdot 3^{c_3}\cdot 5^{c_5}\cdot 7^{c_7}$，如果 $(r'-l'+1) \nmid c_j$ 在此时的 $l',r'$ 下无解。
+		\item 枚举 $6$ 的数量，先贪心取 $8,9$，再贪心取 $4$，再贪心取其它数。
+	\end{itemize}
+	
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{itemize}
+	\item 本题改编自 2021 京东全国大学生算法设计与编程精英赛复赛试题。
+	\item 参考代码详见稍后发布的文字版题解。
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\makebottom     % 创建尾页  % 非标准命令
+
+\end{document}

@@ -36,5 +36,25 @@
 
    比赛考点：程序设计语法与思维。[比赛情况](https://oj.socoding.cn/contest/standing?id=371)
 
-   
+   > 其中，"卡片"一题作者为 [bobby285271](https://github.com/bobby285271)，"天空即为极限"一题题面由 [dakta](https://github.com/loomts) 润色。
+
+8. 2021AK杯网络赛 (2021-10-23)
+
+   比赛考点：程序设计语法与思维、简单算法。[比赛情况](https://oj.socoding.cn/contest/standing?id=375)
+
+   > 其中，"果冻与卡牌游戏","果冻与千层之塔","白茶与千层之塔","白茶与数位之积" 作者为 [bobby285271](https://github.com/bobby285271)
+
+9. 2021Socoding1024节解谜活动 (2021-10-24)
+
+   我出了其中两题编程/算法相关基础题。[活动情况](https://mp.weixin.qq.com/s/gZIo41p02bjrDivDVqa6RA)
+
+10. 2021蓝桥杯热身赛\#2 (2021-12-28)
+
+    比赛考点：接近2021蓝桥杯省赛。[比赛情况](https://oj.socoding.cn/contest/standing?id=415)
+
+    > 其中，"异世界的人偶训练"一题由 [dayuanx](https://github.com/Dayuan-mc) 改编自 [CF721B2](https://codeforces.com/problemset/problem/1527/B2)
+
+11. 2022天梯赛选拔赛
+
+12. 2022ACM集训队选拔赛
 

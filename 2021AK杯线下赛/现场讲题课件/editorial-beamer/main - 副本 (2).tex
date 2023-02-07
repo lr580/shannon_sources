@@ -1,0 +1,510 @@
+\documentclass[
+    % draft,                             % 草稿模式
+     aspectratio=169,                   % 使用 16:9 比例
+]{beamer}
+\mode<presentation>
+\usetheme[
+    navigation=subsections,            % 使用子章节进度显示
+    % lang=en,                           % 使用英文
+    % cjk=true,                          % 使用CJK而不是ctex
+    color=blue,                         % 使用红色主题
+    % pattern=all,                        % 使用全图案装饰
+    % gbt=bibtex,                        % 使用 gbt (使用 bibtex 编译)
+]{SJTUBeamermin}
+% \usecolortheme[]{beaver}                 % 使用其他颜色主题
+\addbibresource{ref.bib}               % gbt!=bibtex
+
+\begin{document}
+    \institute[School of Software]{软件学院}   % 组织
+    \logo{
+        \includegraphics{vi/scnu.png}  % 重定义 logo
+    }
+    %\titlegraphic{                         % 标题图像
+    %    \begin{stampbox}[white]
+    %        \includegraphics[width=0.3\textwidth]{vi/head.jpg}
+    %    \end{stampbox}
+    %}
+    \title{2021 年 AK 杯程序设计竞赛}  % 标题
+    \subtitle{题目分析和解题思路参考}         % 副标题
+    \author{软件协会香农先修班}                  % 作者
+    \date{\today}                          % 日期  
+    \maketitle                             % 创建标题页
+
+%----------------------------------------------------------------
+    
+\part{概况}
+
+\begin{frame}
+	\frametitle{概况}
+	\begin{itemize}
+		\item A：果冻与天空之后
+		\item B：白茶与线程博弈
+		\item C：果冻与阶梯区域
+		\item D：白茶与三元方程
+		\item E：果冻与字串得分
+		\item F：白茶与排名并列
+		\item G：果冻与卡牌游戏
+		\item H：白茶与千层之塔
+		\item I：果冻与千层之塔
+		\item J：白茶与数位之积
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem A. 果冻与天空之后}
+\begin{frame}
+	\frametitle{思路}
+	\begin{itemize}
+		\item 略
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem B. 白茶与线程博弈}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 有 $m$ 个踪迹。
+		\item 每一秒先删掉 $7a$ 个，再在剩下里找 $30b$ 个。
+		\item 问能否找到不少于 $\frac{m}{2}$ 个。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路 - 解方程法}
+	 \begin{exampleblock}{关键点}
+	 	\begin{itemize}
+			\item $m-7at-30b(t-1) \ge 0 \Rightarrow t=\lfloor\dfrac{m+30b}{7a+30b}\rfloor \le  \dfrac{m+30b}{7a+30b}$
+			\item $f=30b(t-1)+m-7at-30b(t-1)=m-7at$
+			\item $t=0$ 时，即 $m < 7a$ ，第一次干扰就删光了，直接判 what a pity
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{完整代码（C 语言）}
+#include <stdio.h>
+int m, a, b, t, f;
+int main()
+{
+    scanf("%d%d%d", &m, &a, &b);
+    t = (m + 30 * b) / (9 * a + 30 * b);
+    f = m - 7 * a * t;
+    if (t && f >= m / 2)
+        printf("I catch you, baicha");
+    else
+        printf("what a pity");
+    return 0;
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem C. 果冻与阶梯区域}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 给定一个坐标 $(x,y)$，判断这个坐标在题图中所在的区域。
+		\item 保证坐标不在区域边界。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	 \begin{exampleblock}{关键点}
+	 	\begin{itemize}
+			\item 第一象限上的点所在区域编号只跟 $\min(x,y)$ 的值有关。
+			\item 将点 $x$ 和 $y$ 的值取相反数不影响点的区域编号。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 使用 \lstinline|fabs()| 取绝对值，直接判断 $(|x|,|y|)$ 所在的区域编号。
+		\item $(|x|,|y|)$ 所在的区域编号为 $\lceil\min(|x|,|y|)\rceil$。
+		\item 上取整可以调用库函数，也可以手写。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 通常使用 \lstinline|double| 存储浮点数。
+			\item 浮点数需要使用 \lstinline|fabs()| 取绝对值。
+			\item 输出的应该是一个整数。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{完整代码（C 语言）}
+#include <stdio.h>
+#include <math.h>
+int main() {
+    double x, y;
+    scanf("%lf%lf", &x, &y);
+    x = fabs(x);
+    y = fabs(y);
+    printf("%.0lf\n", x < y ? ceil(x) : ceil(y));
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem D. 白茶与三元方程}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 解关于 $x,y,z$ 的不定方程 $x^3+y^3+z^3=k$。
+		\item $x,y,z$ 都是整数且 $1 \leq |x|,|y|,|z| \leq 50$。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	\begin{itemize}
+		\item 枚举 $x,y,z$ 所有可能的值。
+		\item 判断此时 $x^3+y^3+z^3$ 是否等于 $k$。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 记得跳过 $x=0$ 或 $y=0$ 或 $z=0$ 的情况。break或退出程序。
+			\item 在没有符合条件的 $x,y,z$ 时要输出 \lstinline|no solution|。
+			\item 可以优化为 $x\le y\le z$。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{核心代码（C 语言）}
+for (int x = -50; x <= 50; x++) {
+    for (int y = x; y <= 50; y++) {
+        for (int z = y; z <= 50; z++) {
+            if (x && y && z && x * x * x + y * y * y + z * z * z == k) {
+                printf("%d %d %d\n", x, y, z);
+                return 0;
+            }
+        }
+    }
+}
+printf("no solution");
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem E. 果冻与字串得分}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 每个字母的得分为它在字母表中的位置。
+		\item 给定长为 $n$ 的字符串 $a$，字符串第 $i$ 个字母编号为 $i$，所有编号为奇数的字母得分的和是 $s_1$，所有编号为偶数的字母的得分的和为 $s_2$，计算 $(s_1-s_2)/n$ 的值。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路 - EOF法}
+	\begin{itemize}
+		\item 不使用数组，直接循环碰到 EOF / 非小写字母跳出。
+		\item 分类编号奇偶性并相应作加减，得到 $s_1-s_2$ 的值。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 调试时 EOF 的输入方式：键盘 / 重定向读文件。
+			\item 转换为浮点数后再做除法。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码 - EOF法}
+	\begin{codeblock}{c}{核心代码（C 语言）}
+int n = 0, p = 0;
+while (EOF != scanf("%c", &c))
+{
+    ++n;
+    if (n % 2 == 1)
+        p += c - 'a' + 1;
+    else
+        p -= c - 'a' + 1;
+}
+printf("%lf", 1.0 * p / n);
+\end{codeblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路 - 字符串法}
+	\begin{itemize}
+		\item 使用 \lstinline|strlen()| 获取字符串长度 $n$。
+		\item 遍历字符串，分类讨论下标奇偶性并相应作加减，得到 $s_1-s_2$ 的值。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 题目中的编号从 $1$ 开始，但字符串下标从 $0$ 开始。
+			\item 不要在判断条件中多次调用 \lstinline|strlen(s)|。
+			\item 转换为浮点数后再做除法。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码 - 字符串法}
+	\begin{codeblock}{c}{字符串读入（C 语言）}
+char a[100010]; // 数组建议开大一些
+scanf("%s", a); // 此处不需要加取地址值符
+\end{codeblock}
+	\begin{codeblock}{c}{核心代码（C 语言）}
+int n = strlen(a), ans = 0;
+for (int i = 0; i < n; i++) {
+    ans += (a[i] - 'a' + 1) * (i % 2 ? -1 : 1);
+}
+printf("%lf\n", 1.0 * ans / n);
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem F. 白茶与排名并列}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 给定已按亲密度降序排列的得分表，求每人的排名。
+		\item 亲密度越高排名越靠前，且同分者赋予相同的排名。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	\begin{itemize}
+		\item 如果某人排在表格第一位或他的分数跟位于他上面一行的人分数不同，他的排名就是他在表格中的行数。
+		\item 否则，他的排名就跟位于他上面一行的人排名相同。
+	\end{itemize}
+	\begin{alertblock}{注意事项}
+		\begin{itemize}
+			\item 如果你使用其它方式实现排名计算，别忘了考虑所有人分数均相同的情况。
+			\item 需要输出的是排名和姓名，而不是分数。
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	\begin{codeblock}{c}{核心代码（C 语言）}
+m[0] = -1;
+for (int i = 1; i <= n; i++) {
+    rank[i] = (m[i] != m[i - 1]) ? i : rank[i - 1];
+}
+printf("%d\n", rank[n]);
+for (int i = 1; i <= n; i++) {
+    if (rank[i] <= r) {
+        printf("%d %s\n", rank[i], x[i]);
+    }
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem G. 果冻与卡牌游戏}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 三名玩家，每人 $7$ 张包含颜色和数字两种属性的牌。
+		\item 轮到自己时都会出从左往右第一张与参照牌同色或同数字的牌。
+		\item 打出去的牌会变成新的参照牌。
+		\item 连续两人无法出牌则第三人出手中最左边的牌。
+		\item 问谁能获得胜利。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	 
+	\begin{exampleblock}{关键点}
+		\begin{itemize}
+			\item 只有轮到了自己而且出牌机会还没使用才可出牌。
+			\item 只有当某张牌还没出过才可出这张牌。
+			\item 只有前面两个人没出牌或牌的任一属性与参照牌相同才可出这张牌。
+			\item 出了牌后必须更新参照牌的属性。
+			\item 出了牌后还需要判断玩家手中还有没有牌。
+			\item 要判断玩家本轮是否没有出牌。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 按照题目要求进行模拟。
+		\item 颜色判断可以优化为只判断首字母。
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	 \begin{codeblock}{c}{核心代码（C 语言）}
+int flag = 1, cur = 0;
+for (int i = 0; i < 7; i++) {
+    if (flag && h[pos][i] && (nocnt == 2 || s[pos][i] == refs || n[pos][i] == refn)) {
+        refs = s[pos][i]; refn = n[pos][i]; // 更新参照牌属性
+        h[pos][i] = nocnt = flag = 0;
+    }
+    cur += h[pos][i]; // 统计玩家手中剩余牌的数量
+}
+if (cur == 0) {
+    puts(pos ? (pos == 1 ? "lr580" : "dayuanx") : "bobby"); break;
+}
+nocnt += flag; pos = (pos + 1) % 3;
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem H. 白茶与千层之塔}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 第 $k$ 层有通往第 $k-1$ 层和第 $k-2$ 层的电梯。
+		\item 如果 $k \bmod 3 = 1$ ，还有通往第 $k-3$ 层的电梯。
+		\item 求第 $a$ 层到第 $b$ 层的方案数。
+		\item $b=1, a\le 20$。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路 - DFS}
+	 \begin{exampleblock}{关键点}
+		 \begin{itemize}
+			\item 用递归 DFS 模拟乘电梯过程，枚举所有选项。
+			\item 模拟走到 $1$ 层时，结束，并方案数自增。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 注意不要越界走到小于 $1$ 层的地方。
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	 \begin{codeblock}{c}{核心代码（C 语言）}
+void dfs(int x) //当前在第k层
+{
+    if (x == b) //到达了目标地
+    {
+        s++; //方案数+1
+        return;
+    }
+    if (x - 1 >= 1) //能走才走x-1
+        dfs(x - 1);
+    if (x - 2 >= 1)
+        dfs(x - 2);
+    if (x % 3 == 1 && x - 3 >= 1)
+        dfs(x - 3);
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem I. 果冻与千层之塔}
+\begin{frame}
+	\frametitle{题目}
+	\begin{itemize}
+		\item 第 $k$ 层有通往第 $k-1$ 层和第 $k-2$ 层的电梯。
+		\item 如果 $k \bmod 3 = 1$ ，还有通往第 $k-3$ 层的电梯。
+		\item 求第 $a$ 层到第 $b$ 层的方案数。
+		\item $a-b\le10^6$。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路 - DP}
+	 \begin{exampleblock}{关键点}
+		 \begin{itemize}
+			\item 方案数跟始末楼层之差 $a-b$ 的值有关。
+			\item 方案数跟 $a\bmod 3$ 的值有关。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 设 $dp_{x,y}$ 为在 $x$ 层开始，往下走 $y$ 层的方案数。
+		\item 使用加法原理和乘法原理推导公式： $dp_{x,y}=\begin{cases}
+			dp_{x-1,y-1}+dp_{x-2,y-2}+dp_{x-3,y-3},&x\bmod 3=1\\
+			dp_{x-1,y-1}+dp_{x-2,y-2},&x\bmod 3\neq1
+			\end{cases}$
+		\item 计算初始值 $dp_{x,0}=dp_{x,1}=1,dp_{x,2}=2$ 
+		\item 优化得 $x$ 只取 $[0,2]$ 
+		\item 取模公式
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{代码}
+	 \begin{codeblock}{c}{核心代码（C 语言）}
+for (int i = 0; i < 3; ++i) //初始值
+    dp[i][0] = dp[i][1] = 1, dp[i][2] = 2;
+for (int j = 3; j <= 1000000; ++j) //要先第二维再第一维，注意顺序
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        if (i % 3 == 1)
+            dp[i][j] = ((dp[(i + 2) % 3][j - 1] + dp[(i + 1) % 3][j - 2]) % mod + dp[i][j - 3]) % mod;
+        else
+            dp[i][j] = (dp[(i + 2) % 3][j - 1] + dp[(i + 1) % 3][j - 2]) % mod;
+    }
+}
+\end{codeblock}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\part{Problem J.白茶与数位之积}
+\begin{frame}
+	\frametitle{题目}
+	
+	\begin{itemize}
+		\item $f(k)$ 为十进制下 $k$ 的所有数位的乘积。
+		\item 解关于 $l,r$ 的不定方程 $x=\prod_{i=l}^{r}{f(i)}$。
+		\item $l,r$ 都是整数且 $0\leq l \leq r \leq 10^y -1$。
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{思路}
+	 
+	\begin{exampleblock}{关键点}
+		\begin{itemize}
+			\item 一旦区间中任意数位出现了 0，数位积就是 0。
+			\item 连续的十个数中必有一个数的个位是 0。
+			\item 要使位数最少，多个 $2,3$ 可以进行合并，必定不取 1。
+		\end{itemize}
+	\end{exampleblock}
+	\begin{itemize}
+		\item 特判 $x=0$ 的情况。
+		\item 令 $l=10k+l',r=10k+r',1 \leq l' \leq r' \leq 9$。
+		\item $f(k)=(\frac{x}{\sum_{i=l'}^{r'}i})^{\frac{1}{r'-l'+1}}$，如果 $(\sum_{i=l'}^{r'}i) \nmid x$ 在此时的 $l',r'$ 下无解。
+		\item 将 $\frac{x}{\sum_{i=l'}^{r'}i}$ 分解为 $2^{c_2}\cdot 3^{c_3}\cdot 5^{c_5}\cdot 7^{c_7}$，如果 $(r'-l'+1) \nmid c_j$ 在此时的 $l',r'$ 下无解。
+		\item 枚举 $6$ 的数量，先贪心取 $8,9$，再贪心取 $4$，再贪心取其它数。
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{自由提问环节}
+	\begin{itemize}
+		\item 如果对题目等仍有任何疑问，欢迎现场提问。
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{完结升气球}
+	\begin{itemize}
+		\item Thanks!
+	\end{itemize}
+\end{frame}
+
+%----------------------------------------------------------------
+
+\makebottom     % 创建尾页  % 非标准命令
+
+\end{document}

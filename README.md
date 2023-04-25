@@ -38,7 +38,7 @@
 
    > 其中，"卡片"一题作者为 [bobby285271](https://github.com/bobby285271)，"天空即为极限"一题题面由 [dakta](https://github.com/loomts) 润色。
 
-8. 2021AK杯网络赛 (2021-10-23)
+8. 2021AK杯线下赛 (2021-10-23)
 
    比赛考点：程序设计语法与思维、简单算法。[比赛情况](https://oj.socoding.cn/contest/standing?id=375)
 
@@ -71,4 +71,10 @@
 14. 2022CS杯选拔赛 (2022-10-13)
 
     比赛考点：基础(ACM铜)算法。[比赛情况](http://csoj.scnu.edu.cn/contest/71/rank)
+
+15. 2022AK杯(2022-10-23)
+
+    比赛考点：程序设计语法与思维、简单算法。[比赛情况](https://oj.socoding.cn/contest/standing?id=543)
+
+    > 我出了其中的 B(Serein的排序),C(五边形数),D(排列的排名),G(只因你太美),I(Ustinian的围骰) 五题。
 

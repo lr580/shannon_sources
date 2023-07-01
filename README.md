@@ -88,7 +88,7 @@
 
     比赛考点：基础算法和思维。[比赛情况](https://acm.socoding.cn/public)
 
-    > 其中，"给灵梦修宽带(打黑工)","不会有人不懂二进制吧","这就是我的逃跑路线哒"作者为 [Kobe](https://github.com/995509224)，题面背景润色为 [白渃](https://blog.bairuo.net/)
+    > 其中，"给灵梦修宽带(打黑工)","不会有人不懂二进制吧","这就是我的逃跑路线哒"作者为 [Kobe](https://github.com/hyk1st)，题面背景润色为 [白渃](https://blog.bairuo.net/)
 
 18. 2023SCNUCPC华师校赛线下赛(2023-4-23)
 

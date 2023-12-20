@@ -80,19 +80,19 @@
 
 16. 2023天梯赛选拔赛(2023-3-18)
 
-    比赛考点：接近2022团体程序设计天梯赛。[比赛情况](https://oi-oj.socoding.cn/contest/view?id=572)
+    比赛考点：接近2022团体程序设计天梯赛。[比赛情况](https://cloud.socoding.cn/s/ZBdhb)
 
     > 其中，"网络容量","模数定理"两题作者为 [cst7](), "陌上花开","归零行动"两题作者为 [Tension](https://github.com/ASAP666666)
 
 17. 2023SCNUCPC华师校赛网络赛(2023-4-15)
 
-    比赛考点：基础算法和思维。[比赛情况](https://acm.socoding.cn/public)
+    比赛考点：基础算法和思维。[比赛情况](https://cloud.socoding.cn/s/dA9CW)
 
     > 其中，"给灵梦修宽带(打黑工)","不会有人不懂二进制吧","这就是我的逃跑路线哒"作者为 [Kobe](https://github.com/hyk1st)，题面背景润色为 [白渃](https://blog.bairuo.net/)
 
 18. 2023SCNUCPC华师校赛线下赛(2023-4-23)
 
-    比赛考点：程序设计及算法实现，如数论、图论、字符串等。[比赛情况](https://acm.socoding.cn/public)
+    比赛考点：程序设计及算法实现，如数论、图论、字符串等。[比赛情况](https://cloud.socoding.cn/s/PMKCD)
 
     > 其中，"人里孩童的疑惑-easy","人里孩童的疑惑-hard","修缮博丽神社","幽幽子的大进货",作者为 [Kobe](https://github.com/995509224)，"幸运数字大比拼"作者为[pony](https://oj.socoding.cn/user/view?id=308)，题面背景润色为 [白渃](https://blog.bairuo.net/)
 
